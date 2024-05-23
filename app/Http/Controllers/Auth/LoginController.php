@@ -45,7 +45,7 @@ class LoginController extends Controller
     {
         if (auth()->user()->type == 'admin') {
             // got to admin dashboard 
-            dd('admin');
+            return '/dashboard/index';
         }
         redirect()->route('index');
 
