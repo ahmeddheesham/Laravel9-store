@@ -23,9 +23,9 @@ class ImageUpload
             $constraint->upsize();
         })->stream();
 
-        Storage::disk('public')->put($path . $imagename, $image);
+        Storage::disk('images')->put($path . $imagename, $image);
 
-        return 'public/' . $path . $imagename;
+        return  $path . $imagename;
     }
 
 

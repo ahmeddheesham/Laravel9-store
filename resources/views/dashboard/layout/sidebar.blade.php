@@ -3,8 +3,8 @@
     <div class="main-header-left d-none d-lg-block">
         <div class="logo-wrapper">
             <a href="index.html">
-                <img class="d-none d-lg-block blur-up lazyloaded"
-                    src="assets/images/dashboard/multikart-logo.png" alt="">
+                <img class="d-none d-lg-block blur-up lazyloaded" src="assets/images/dashboard/multikart-logo.png"
+                    alt="">
             </a>
         </div>
     </div>
@@ -295,32 +295,23 @@
             </li>
 
             <li>
-                <a class="sidebar-header" href="support-ticket.html"><i
-                        data-feather="phone"></i><span>Support Ticket</span>
+                <a class="sidebar-header" href="support-ticket.html"><i data-feather="phone"></i><span>Support
+                        Ticket</span>
                 </a>
             </li>
 
             <li>
-                <a class="sidebar-header" href="reports.html"><i
-                        data-feather="bar-chart"></i><span>Reports</span>
+                <a class="sidebar-header" href="reports.html"><i data-feather="bar-chart"></i><span>Reports</span>
                 </a>
             </li>
 
             <li>
-                <a class="sidebar-header" href="javascript:void(0)"><i
-                        data-feather="settings"></i><span>Settings</span><i
-                        class="fa fa-angle-right pull-right"></i></a>
-                <ul class="sidebar-submenu">
-                    <li>
-                        <a href="profile.html"><i class="fa fa-circle"></i>Profile
-                        </a>
-                    </li>
-                </ul>
+                <a class="sidebar-header" href="{{route('dashboard.settings.index')}}"><i data-feather="settings"></i><span>اعدادات
+                        الموقع</span></a>
             </li>
 
             <li>
-                <a class="sidebar-header" href="invoice.html"><i
-                        data-feather="archive"></i><span>Invoice</span></a>
+                <a class="sidebar-header" href="invoice.html"><i data-feather="archive"></i><span>Invoice</span></a>
             </li>
 
             <li>
