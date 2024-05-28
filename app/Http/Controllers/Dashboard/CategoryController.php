@@ -28,27 +28,27 @@ class CategoryController extends Controller
     public function getall() 
     {
         $query = Category::select('*')->with('parent');
-        return DataTables::of($query)
-        ->addIndexColumn()
-        ->addColumn('action', function ($row) {
-            return $btn = '
-            <a 
-            href="'.Route('dashboard.categories.edit', $row->id) .'"  
-            class="edit btn btn-success btn-sm "> 
-            <i class="fa fa-edit"></i> 
-            </a>
-            
-            <button 
-            type="button" 
-            id="deleteBtn" 
-            data_id="'. $row->id .'"  
-            class= "btn btn-danger mt-md-0 mt-2"  
-            data-bs-toggle="modal"
-            data-original-title="test"
-            data-bs-target="#deletemodal"> 
-            <i class = "fa fa-tarsh"></i> 
-            </button>' ;
-        })
+        return  DataTables::of($query)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) 
+            {
+                return $btn = '
+                        <a href="' . Route('dashboard.categories.edit', $row->id) . '"
+                          class="edit btn btn-success btn-sm" >
+                          <i class="fa fa-edit"></i>
+                          </a>
+
+                        <button 
+                        type="button" 
+                        id="deleteBtn"  
+                        data-id="' . $row->id . '" 
+                        class="btn btn-danger mt-md-0 mt-2" 
+                        data-bs-toggle="modal"
+                        data-original-title="test" 
+                        data-bs-target="#deletemodal">
+                        <i class="fa fa-trash"></i>
+                        </button>';
+            })
 
         ->addcolumn('parent', function($row) {
             return($row->parent == 0 ) ? 'قسم رئيسي'  : $row->parents->name;
