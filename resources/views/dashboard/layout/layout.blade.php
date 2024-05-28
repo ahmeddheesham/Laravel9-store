@@ -43,6 +43,7 @@
     <!-- App css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard') }}/assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard') }}/dropify.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.bootstrap5.min.css">
 
 
 
@@ -295,11 +296,14 @@
     <!--script admin-->
     <script src="{{ asset('dashboard') }}/assets/js/admin-script.js"></script>
     <script src="{{ asset('dashboard') }}/dropify.js"></script>
-
+    <script src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.7/js/dataTables.bootstrap5.min.js"></script>
 
     <script>
         $('.dropify').dropify();
     </script>
+
+    @stack('javascripts')
 
 
 </body>
