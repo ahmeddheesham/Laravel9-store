@@ -19,7 +19,7 @@ class ImageUpload
 
 
         $image = Image::make($request->path());
-        $image->fit($height, $width, function ($constraint) {
+        $image->fit($width, $height, function ($constraint) {
             $constraint->upsize();
         })->stream();
 
