@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Services;
+
 use App\Models\Category;
 use App\Utils\ImageUpload;
 use Yajra\DataTables\Facades\DataTables;
@@ -17,12 +18,12 @@ class CategoryService
     public function store($params)
     {
         $params['parent_id'] = $params['parent_id'] ?? 0;
-        if(isset($params['image'])) {
+        if (isset($params['image'])) {
             $params['image'] = ImageUpload::uploadImage($params['image']);
         }
         return Category::create($params);
     }
-    
+
 
 
 
@@ -30,7 +31,7 @@ class CategoryService
     public function getById($id, $childrenCount = false)
     {
         $query = Category::where('id', $id);
-        if($childrenCount){
+        if ($childrenCount) {
             $query->withCount('child');
         }
         return $query->firstOrFail();
@@ -43,7 +44,7 @@ class CategoryService
         // dd($params);
         $category = $this->getById($id);
         $params['parent_id'] = $params['parent_id'] ?? 0;
-        if(isset($params['image'])) {
+        if (isset($params['image'])) {
             $params['image'] = ImageUpload::uploadImage($params['image']);
         }
         return $category->update($params);
@@ -55,13 +56,12 @@ class CategoryService
 
 
 
-    public function datatable() 
+    public function datatable()
     {
         $query = Category::select('*')->with('parent');
-        return  DataTables::of($query)
+        return DataTables::of($query)
             ->addIndexColumn()
-            ->addColumn('action', function ($row) 
-            {
+            ->addColumn('action', function ($row) {
                 return $btn = '
                         <a href="' . Route('dashboard.categories.edit', $row->id) . '"
                           class="edit btn btn-success btn-sm" >
@@ -82,26 +82,23 @@ class CategoryService
 
 
 
+            ->addcolumn('parent', function ($row) {
 
-        
+                if ($row->parent) {
+                    return $row->parent->name;
+                }
+                return 'قسم رئيسي';
 
-        ->addcolumn('parent', function($row) {
+                // return($row->parent == 0 ) ? 'قسم رئيسي'  : $row->parents->name;
+    
+            })
 
-             if($row->parent){
-                return $row->parent->name;
-             }
-             return 'قسم رئيسي';
-             
-            // return($row->parent == 0 ) ? 'قسم رئيسي'  : $row->parents->name;
+            ->addcolumn('image', function ($row) {
+                return '<img src="' . asset($row->image) . '"  width="100px"  height="100px"  >';
+            })
 
-        })
-
-        ->addcolumn('image', function($row) {
-            return '<img src="' .asset($row->image) . '"  width="100px"  height="100px"  >';
-        })
-
-        ->rawColumns(['parent', 'action', 'image'])
-        ->make(true);
+            ->rawColumns(['parent', 'action', 'image'])
+            ->make(true);
     }
 
 
