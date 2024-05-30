@@ -14,6 +14,13 @@ class CategoryRepository
     }
 
 
+    public function baseQuery($relations=[])
+    {
+        $query = $this->category->select('*')->with($relations);
+        return $query;
+    }
+
+
     
 
     public function getMainCategories()
