@@ -55,12 +55,12 @@ class CategoryController extends Controller
         return redirect()->route('dashboard.categories.edit' , $id)->with('success', 'تمت الاضافة بنجاح');
     }
 
-    
+
 
 
     public function delete(CategoryDeleteRequest $request)
     {
-     Category::whereId($request->id)->delete();
-     return redirect()->route('dashboard.categories.index');
+        $this->categoryService->delete($request->validated());
+        return redirect()->route('dashboard.categories.index');
     }
 }
