@@ -43,6 +43,13 @@ class ProductRepository implements RepositoryInterface
 
 
 
+    public function addColor($product, $params)
+    {
+        $product->productColor()->createMany($params['colors']);
+    }
+
+
+
 
 
     public function update($id, $params)

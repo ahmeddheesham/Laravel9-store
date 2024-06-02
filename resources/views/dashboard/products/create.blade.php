@@ -97,12 +97,12 @@
                                                 name="discount_price">
                                         </div>
 
-                                        {{-- <div class="form-group">
+                                        <div class="form-group">
                                             <label for="validationCustom02" class="col-form-label" >
                                                 الألوان المتاحة للمنتج </label>
                                             <select class="form-control colors" multiple="multiple" name="colors[]">
                                             </select>
-                                        </div> --}}
+                                        </div>
 
 
                                     </div>

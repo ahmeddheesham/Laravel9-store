@@ -33,8 +33,20 @@ class ProductService
         {
             $params['image'] = ImageUpload::uploadImage($params['image']);
         }
+        $product = $this->prodctRepository->store($params);
 
-        return $this->prodctRepository->store($params);
+
+        if (isset($params['colors'])) {
+            $params['colors'] = array_map(function($color) use ($product) {
+                $colors['color'] = $color;
+                $colors['product_id'] = $product->id;
+                return $colors;
+            }, $params['colors']);
+
+            $this->prodctRepository->addColor($product, ['colors' => $params['colors']]);
+        }
+
+        return $product;
     }
 
 
