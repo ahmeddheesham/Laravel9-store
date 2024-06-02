@@ -119,6 +119,11 @@ class CategoryService
 
 
 
+    public function getAll()
+    {
+        return $this->categoryRepository->baseQuery(['child'])->get();
+    }
+
 
 
 }

@@ -3,6 +3,7 @@
 namespace App\Services;
 use App\Models\Product;
 use App\Repositorties\ProductRepository;
+use App\Utils\ImageUpload;
 use Yajra\DataTables\Facades\DataTables;
 
 class ProductService
@@ -23,15 +24,30 @@ class ProductService
         return $this->prodctRepository->getById($id);
     }
 
+
+
+
     public function store($params)
     {
+        if (isset($params['image']))
+        {
+            $params['image'] = ImageUpload::uploadImage($params['image']);
+        }
+
         return $this->prodctRepository->store($params);
     }
+
+
+
 
     public function update($id, $params)
     {
         return $this->prodctRepository->update($id, $params);
     }
+
+
+
+
 
     public function delete($params)
     {
@@ -39,9 +55,13 @@ class ProductService
     }
 
 
+
+
+
+
     public function datatable()
     {
-        $query = $this->prodctRepository->baseQuery(['parent']);
+        $query = $this->prodctRepository->baseQuery(relations:['category'],withCount:['productColor']);
         return DataTables::of($query)
             ->addColumn('action', function ($row) {
                 return $btn = '
@@ -60,6 +80,12 @@ class ProductService
                         data-bs-target="#deletemodal">
                         <i class="fa fa-trash"></i>
                         </button>';
+            })
+
+
+            ->addColumn('category', function ($row) 
+            {
+                return $row->category->name;
             })
 
             ->rawColumns(['action'])

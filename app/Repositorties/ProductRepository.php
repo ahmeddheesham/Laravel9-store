@@ -15,9 +15,13 @@ class ProductRepository implements RepositoryInterface
     }
 
 
-    public function baseQuery($relations=[])
+    public function baseQuery($relations=[], $withCount=[])
     {
         $query = $this->product->select('*')->with($relations);
+        foreach ($withCount as $key => $value) 
+        {
+            $query->withCount($value);
+        }
         return $query;
     }
 
